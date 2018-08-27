@@ -1,3 +1,5 @@
+### https://raw.github.com/github/gitignore/318f8fc99146275e0828737ac2898930c6d8342f/Python.gitignore
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -102,3 +104,5 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
