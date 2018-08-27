@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-admin = "*"
+"psycopg2" = "*"
+
+[dev-packages]
+ipdb = "*"
+ipython = "*"
+"flake8" = "*"
+jedi = "*"
+"autopep8" = "*"
+
+[requires]
+python_version = "3.6"
