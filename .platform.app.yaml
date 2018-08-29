@@ -13,6 +13,8 @@ type: python:3.6
 hooks:
   build: |
     set -e
+    python -m venv .venv
+    source .venv/bin/activate
     pip install -U pip setuptools wheel pipenv
     PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
     npm config set "@fortawesome:registry" https://npm.fontawesome.com/
