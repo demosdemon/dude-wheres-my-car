@@ -1,0 +1,6 @@
+{
+  "extends": "@leblanccodes",
+  "rules": {
+    "notice/notice": 0
+  }
+}
