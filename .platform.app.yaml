@@ -7,7 +7,7 @@
 name: dude
 
 # The runtime the application uses.
-type: "python:3.6"
+type: python:3.6
 
 # The hooks executed at various points in the lifecycle of the application.
 hooks:
@@ -29,8 +29,8 @@ disk: 1024
 # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
 # side is in the form `<service name>:<endpoint name>`.
 relationships:
-  postgres: "postgres:postgresql"
-  # redis: "redis:redis"
+  postgres: postgres:postgresql
+  redis: redis:redis
 
 # R/W mounts
 mounts:
