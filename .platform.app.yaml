@@ -13,9 +13,7 @@ type: python:3.6
 hooks:
   build: |
     set -e
-    python -m venv .venv
-    .venv/bin/pip install -U pip setuptools wheel pipenv
-    PIPENV_VENV_IN_PROJECT=1 .venv/bin/pipenv install --deploy
+    pip install -r requirements/production.txt
     npm config set "@fortawesome:registry" https://npm.fontawesome.com/
     npm config set "//npm.fontawesome.com/:_authToken" $FORT_AWESOME_TOKEN
     npm install -g grunt-cli
