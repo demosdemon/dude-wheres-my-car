@@ -24,7 +24,7 @@ else:
     SECRET_KEY = env.str('SECRET_KEY')
 
 if platform_relationships:
-    platform_relationships = json.loads(b64decode(platform_relationships.decode('ascii')))
+    platform_relationships = json.loads(b64decode(platform_relationships.encode('ascii')))
     SQLALCHEMY_DATABASE_URI = fmt.format_map(platform_relationships['postgres'])
     # TODO: redis
 else:
