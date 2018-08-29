@@ -14,9 +14,8 @@ hooks:
   build: |
     set -e
     python -m venv .venv
-    . .venv/bin/activate
-    pip install -U pip setuptools wheel pipenv
-    PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
+    .venv/bin/pip install -U pip setuptools wheel pipenv
+    PIPENV_VENV_IN_PROJECT=1 .venv/bin/pipenv install --deploy
     npm config set "@fortawesome:registry" https://npm.fontawesome.com/
     npm config set "//npm.fontawesome.com/:_authToken" $FORT_AWESOME_TOKEN
     npm install -g grunt-cli
@@ -51,7 +50,7 @@ web:
     socket_family: unix
   # commands are run once after deployment to start the application process
   commands:
-    start: gunicorn -w 4 -b unix:$SOCKET dude.app:create_app()
+    start: .venv/bin/gunicorn -w 4 -b unix:$SOCKET dude.app:create_app()
   locations:
     /:
       passthru: true
