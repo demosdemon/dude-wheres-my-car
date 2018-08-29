@@ -12,6 +12,7 @@ install: Pipfile.lock package.json
 
 Pipfile.lock:
 	PIPENV_VENV_IN_PROJECT=1 pipenv lock
+	pipenv lock -r r
 
 build:
 	@echo 'Not Implemented yet.'
