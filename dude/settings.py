@@ -25,7 +25,7 @@ else:
 
 if platform_relationships:
     platform_relationships = json.loads(b64decode(platform_relationships.encode('ascii')))
-    SQLALCHEMY_DATABASE_URI = fmt.format_map(platform_relationships['postgres'][0]])
+    SQLALCHEMY_DATABASE_URI = fmt.format_map(platform_relationships['postgres'][0])
     # TODO: redis
 else:
     SQLALCHEMY_DATABASE_URI = env.str('DATABASE_URL')
