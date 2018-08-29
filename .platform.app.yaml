@@ -12,13 +12,14 @@ type: python:3.6
 # The hooks executed at various points in the lifecycle of the application.
 hooks:
   build: |
+    set -e
     npm config set "@fortawesome:registry" https://npm.fontawesome.com/
     npm config set "//npm.fontawesome.com/:_authToken" $FORT_AWESOME_TOKEN
     pip install --upgrade pip setuptools wheel pipenv
     pipenv install --system --deploy
     npm install -g grunt-cli
     npm install
-    npx grunt build
+    grunt build
   # deploy: |
   #   flask db update
 
