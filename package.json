@@ -14,36 +14,11 @@
   },
   "description": "Dude, where's my car?",
   "devDependencies": {
-    "@types/browserify": "^12.0.33",
-    "@types/del": "^3.0.1",
-    "@types/gulp": "^4.0.5",
-    "@types/gulp-autoprefixer": "0.0.31",
-    "@types/gulp-copy": "0.0.4",
-    "@types/gulp-sass": "0.0.31",
-    "@types/gulp-sourcemaps": "0.0.32",
-    "@types/node": "^10.9.3",
-    "@types/vinyl-buffer": "^1.0.0",
-    "browserify": "^16.2.2",
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^6.0.0",
-    "gulp-cli": "^2.0.1",
-    "gulp-copy": "^1.1.0",
-    "gulp-sass": "^4.0.1",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.1",
-    "gulplog": "^1.0.0",
-    "node-sass": "^4.9.3",
-    "ts-node": "^7.0.1",
-    "tsify": "^4.0.0",
     "tslint": "^5.11.0",
-    "typescript": "^3.0.1",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0",
-    "watchify": "^3.11.0"
+    "typescript": "^3.0.1"
   },
   "engines": {
-    "node": ">= 4"
+    "node": "~8.11.4"
   },
   "homepage": "https://github.com/demosdemon/dude-wheres-my-car#readme",
   "license": "MIT",
