@@ -24,6 +24,7 @@ def create_app(config_object='dude.settings'):
 
 def register_extensions(app):
     """Register Flask extensions."""
+    import dude.admin  # noqa
     admin.init_app(app)
     alembic.init_app(app)
     bcrypt.init_app(app)
@@ -71,29 +72,3 @@ def register_commands(app):
     app.cli.add_command(commands.lint)
     app.cli.add_command(commands.clean)
     app.cli.add_command(commands.urls)
-
-# import os
-
-# from flask import Flask
-# from flask_bcrypt import Bcrypt
-
-# from . import admin, config, db
-
-# bcrypt = Bcrypt()
-
-
-# def create_app(test_config=None):
-#     app = Flask(__name__.split('.')[0], instance_relative_config=True)
-#     config.init_app(app, test_config)
-
-#     try:
-#         os.makedirs(app.instance_path)
-#     except OSError:
-#         pass
-
-#     bcrypt.init_app(app)
-#     db.init_app(app)
-#     admin.init_app(app)
-
-#     config.validate(app)
-#     return app
