@@ -10,6 +10,43 @@ import json
 from base64 import b64decode
 
 from environs import Env
+from six.moves.urllib_parse import urlencode, urlunsplit
+
+
+def make_netloc(data):
+    netloc = data.get('netloc')
+    if netloc:
+        return netloc
+
+    username = data.get('username')
+    password = data.get('password')
+    hostname = data.get('hostname') or data.get('host')
+    port = data.get('port')
+
+    if not hostname:
+        raise ValueError('requires at least one of netloc, hostname, or host')
+
+    if username and password:
+        username = '{}:{}'.format(username, password)
+
+    netloc = '{}{}{}{}{}'.format(
+        username or '',
+        '@' if username else '',
+        hostname,
+        ':' if port else '',
+        port or ''
+    )
+
+
+def make_url(data):
+    scheme = data.get('scheme')
+    netloc = make_netloc(data)
+    path = data.get('path')
+    query = data.get('query', {})
+    query = urlencode(query)
+    fragment = data.get('fragment')
+    return urlunsplit((scheme, netloc, path, query, fragment))
+
 
 env = Env()
 env.read_env()
@@ -25,13 +62,17 @@ else:
 
 if platform_relationships:
     platform_relationships = json.loads(b64decode(platform_relationships.encode('ascii')))
-    SQLALCHEMY_DATABASE_URI = fmt.format_map(platform_relationships['postgres'][0])
-    # TODO: redis
+    postgres = platform_relationships['postgres'][0]
+    redis = platform_relationships['redis'][0]
+    SQLALCHEMY_DATABASE_URI = make_url(postgres)
+    CACHE_REDIS_URL = make_url(redis)
 else:
     SQLALCHEMY_DATABASE_URI = env.str('DATABASE_URL')
+    CACHE_REDIS_URL = env.str('CACHE_REDIS_URL')
 
 ENV = env.str('FLASK_ENV', default='production')
 DEBUG = ENV == 'development'
+
 BCRYPT_HANDLE_LONG_PASSWORDS = True
 BCRYPT_LOG_ROUNDS = env.int('BCRYPT_LOG_ROUNDS', default=13)
 CACHE_TYPE = 'redis'  # Can be "memcached", "redis", etc.
