@@ -7,11 +7,29 @@ import shlex
 from functools import partial
 from itertools import chain, tee
 
+from six.moves.urllib_parse import urlencode, urlunsplit
+
 _json_vars = (
     'PLATFORM_APPLICATION',
     'PLATFORM_VARIABLES',
     'PLATFORM_RELATIONSHIPS',
     'PLATFORM_ROUTES',
+)
+
+_known_attrs = (
+    'application',
+    'application_name',
+    'app_command',
+    'branch',
+    'dir',
+    'environment',
+    'project',
+    'project_entropy',
+    'relationships',
+    'routes',
+    'smtp_host',
+    'tree_id',
+    'variables',
 )
 
 
@@ -25,6 +43,57 @@ def decode_json(data):
 def make_name(key):
     """Return a string suitable for use as a python identifer from an environment key."""
     return key.replace('PLATFORM_', '').lower()
+
+
+def make_netloc(data):
+    """Make the `netloc` portion of a url from a `dict` of values.
+
+    If `netloc` is found in the `dict`, it is returned; otherwise, the `netloc`
+    is `[{username}[:{password}]@]{hostname}[:{port}]`. If `hostname` is not
+    found, `host` is used instead.
+
+    If neither `netloc`, `hostname`, nor `host` are found, a `ValueError` is
+    raised.
+    """
+    netloc = data.get('netloc')
+    if netloc:
+        return netloc
+
+    username = data.get('username')
+    password = data.get('password')
+    hostname = data.get('hostname') or data.get('host')
+    port = data.get('port')
+
+    if not hostname:
+        raise ValueError('requires at least one of netloc, hostname, or host')
+
+    if username and password:
+        username = '{}:{}'.format(username, password)
+
+    netloc = '{}{}{}{}{}'.format(
+        username or '',
+        '@' if username else '',
+        hostname,
+        ':' if port else '',
+        port or ''
+    )
+
+
+def make_url(data):
+    """Construct a URL from a `dict` of components.
+
+    Uses `scheme`, `netloc`, `username`, `password`, `hostname`, `host`,
+    `port` (see `make_netloc`), `path`, `query`, and `fragment`.
+    """
+    scheme = data.get('scheme')
+    netloc = make_netloc(data)
+    path = data.get('path')
+    query = data.get('query', {})
+    query = urlencode(query)
+    fragment = data.get('fragment')
+    comps = (scheme, netloc, path, query, fragment)
+    comps = map(lambda s: s or '', comps)
+    return urlunsplit(comps)
 
 
 class attrdict(dict):  # noqa: N801 # PascalCase warning
@@ -78,6 +147,19 @@ class Environment(object):
         speed up other string formatting functions.
         """
         self._keys = keys
+
+    def __getattr__(self, name):
+        """Do not raise an AttributeError if the `name` is in our list of known attrs."""
+        if name in _known_attrs:
+            return None
+
+        raise AttributeError
+
+    def __dir__(self):
+        """Return the known attributes of this instance."""
+        names = set(super(Environment, self).__dir__())
+        names.update(_known_attrs)
+        return names
 
     def __repr__(self):
         """Represent the environment in a human friendly way for debugging."""
