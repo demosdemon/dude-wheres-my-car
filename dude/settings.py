@@ -45,7 +45,9 @@ def make_url(data):
     query = data.get('query', {})
     query = urlencode(query)
     fragment = data.get('fragment')
-    return urlunsplit((scheme, netloc, path, query, fragment))
+    comps = (scheme, netloc, path, query, fragment)
+    comps = map(lambda s: s or '', comps)
+    return urlunsplit(comps)
 
 
 env = Env()
