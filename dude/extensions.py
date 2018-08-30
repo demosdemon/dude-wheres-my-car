@@ -9,7 +9,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 
-admin = Admin(name='dude', template_mode='bootstrap3')
+admin = Admin(template_mode='bootstrap3')
 alembic = Alembic()
 bcrypt = Bcrypt()
 cache = Cache()
