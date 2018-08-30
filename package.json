@@ -48,6 +48,7 @@
   "homepage": "https://github.com/demosdemon/dude-wheres-my-car#readme",
   "license": "MIT",
   "name": "dude-wheres-my-car",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/demosdemon/dude-wheres-my-car.git"
