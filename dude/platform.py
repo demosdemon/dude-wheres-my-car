@@ -166,7 +166,7 @@ class Environment(object):
         return '{}({})'.format(self.__class__.__name__, ', '.join(self._keys))
 
     def __str__(self):
-        """Format the environment as `.env` file."""
+        """Format the environment as a `.sh` file."""
         def quote(obj):
             if not isinstance(obj, str):
                 obj = json.dumps(obj, sort_keys=True, separators=(',', ':'))
@@ -182,6 +182,27 @@ class Environment(object):
         values = map(quote, values)
         items = map('declare -x {}={};\n'.format, keys, values)
         return ''.join(items)
+
+    def get_relationship(self, name):
+        """Return the raw list of relationships for `name`."""
+        if self.relationships:
+            return self.relationships[name]
+
+    def get_service(self, service):
+        """Return an iterator of relationships of type `service`."""
+        if self.relationships:
+            for value in self.relationships.values():
+                for svc in value:
+                    if svc.service == service:
+                        yield svc
+
+    def get_relationship_urls(self, name):
+        """Return an iterator of urls to the relationship named `name`."""
+        return map(make_url, self.get_relationship(name) or ())
+
+    def get_service_urls(self, service):
+        """Return an iterator of urls to the service of type `service`."""
+        return map(make_url, self.get_service(service))
 
 
 def build_environment(*extra_keys, **kwargs):
