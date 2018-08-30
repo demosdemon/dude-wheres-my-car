@@ -2,5 +2,5 @@ postgres:
   type: postgresql:9.6
   disk: 2048
 
-# redis:
-#   type: redis:<lookup the version>
+redis:
+  type: redis:3.2

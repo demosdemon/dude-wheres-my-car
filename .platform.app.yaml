@@ -7,16 +7,18 @@
 name: dude
 
 # The runtime the application uses.
-type: "python:3.6"
+type: python:3.6
 
 # The hooks executed at various points in the lifecycle of the application.
 hooks:
   build: |
-    pip install --upgrade pip setuptools wheel pipenv
-    pipenv install --system --deploy
-    npm install -g grunt-cli
+    set -e
+    pip install -r requirements/production.txt
+    npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+    npm config set "//npm.fontawesome.com/:_authToken" $FORT_AWESOME_TOKEN
+    npm install -g gulp-cli
     npm install
-    npx grunt build
+    gulp build
   # deploy: |
   #   flask db update
 
@@ -29,8 +31,8 @@ disk: 1024
 # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
 # side is in the form `<service name>:<endpoint name>`.
 relationships:
-  postgres: "postgres:postgresql"
-  # redis: "redis:redis"
+  postgres: postgres:postgresql
+  redis: redis:redis
 
 # R/W mounts
 mounts:
@@ -46,7 +48,7 @@ web:
     socket_family: unix
   # commands are run once after deployment to start the application process
   commands:
-    start: gunicorn -w 4 -b unix:$SOCKET dude.app:create_app()
+    start: gunicorn -w 4 -b unix:$SOCKET dude.app:create_app\(\)
   locations:
     /:
       passthru: true

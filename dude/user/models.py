@@ -2,11 +2,10 @@
 """User models."""
 import datetime as dt
 
-from flask_admin.contrib.sqla import ModelView
 from flask_login import UserMixin
 
 from dude.database import Column, Model, SurrogatePK, db, reference_col, relationship
-from dude.extensions import admin, bcrypt
+from dude.extensions import bcrypt
 
 now = dt.datetime.utcnow
 
@@ -76,7 +75,3 @@ class User(UserMixin, SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<User({username!r})>'.format(username=self.username)
-
-
-admin.add_view(ModelView(Role, db.session))
-admin.add_view(ModelView(User, db.session))
