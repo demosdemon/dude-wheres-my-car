@@ -16,9 +16,9 @@ hooks:
     pip install -r requirements/production.txt
     npm config set "@fortawesome:registry" https://npm.fontawesome.com/
     npm config set "//npm.fontawesome.com/:_authToken" $FORT_AWESOME_TOKEN
-    npm install -g gulp-cli
+    npm install -g grunt-cli
     npm install
-    gulp build
+    grunt build
   # deploy: |
   #   flask db update
 

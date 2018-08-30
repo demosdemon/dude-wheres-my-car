@@ -29,11 +29,6 @@
     "url": "git+https://github.com/demosdemon/dude-wheres-my-car.git"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack --progress --colors -p",
-    "flask-server": "pipenv run flask run",
-    "lint": "eslint \"assets/js/*.js\"",
-    "start": "concurrently -n \"WEBPACK,FLASK\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run webpack-dev-server\" \"npm run flask-server\"",
-    "webpack-dev-server": "NODE_ENV=debug webpack-dev-server --port 2992 --hot --inline"
   },
   "version": "1.0.0"
 }
