@@ -13,6 +13,13 @@ import sourcemaps from 'gulp-sourcemaps';
 import path from 'path';
 import buffer from 'vinyl-buffer';
 
+// transpile typescript into javascript
+// bundle javascript
+// uglify javascript
+// transpile scss into css
+// autoprefixer css
+// minify css
+
 const maxInt = 2 ** 32 - 1;
 const getRandomIntInclusive = (min = 0, max = maxInt) => {
   min = Math.ceil(min);

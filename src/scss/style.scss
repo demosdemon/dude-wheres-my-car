@@ -1,20 +1,18 @@
 /*
- * App specific CSS files where.
+ * App specific CSS files here.
  */
 
 // override vendor variables here
 // node_modules/@fortawesome/fontawesome-pro/scss/_variables.scss
 // node_modules/bootstrap/scss/_variables.scss
 
-// webpack resolves the '~' prefixed paths to `node_modules`
-// note that there is NO slash following the tilde
-// @import '~@fortawesome/fontawesome-pro/scss/fontawesome.scss';
-// @import '~@fortawesome/fontawesome-pro/scss/v4-shims.scss';
-// @import '~@fortawesome/fontawesome-pro/scss/brands.scss';
-// @import '~@fortawesome/fontawesome-pro/scss/light.scss';
-// @import '~@fortawesome/fontawesome-pro/scss/regular.scss';
-// @import '~@fortawesome/fontawesome-pro/scss/solid.scss';
-// @import '~bootstrap/scss/bootstrap.scss';
+@import '@fortawesome/fontawesome-pro/scss/fontawesome.scss';
+@import '@fortawesome/fontawesome-pro/scss/v4-shims.scss';
+@import '@fortawesome/fontawesome-pro/scss/brands.scss';
+@import '@fortawesome/fontawesome-pro/scss/light.scss';
+@import '@fortawesome/fontawesome-pro/scss/regular.scss';
+@import '@fortawesome/fontawesome-pro/scss/solid.scss';
+@import 'bootstrap/scss/bootstrap.scss';
 
 /* universal */
 

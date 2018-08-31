@@ -3,6 +3,12 @@
     "email": "brandon@leblanc.codes",
     "name": "Brandon LeBlanc"
   },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead"
+  ],
   "bugs": {
     "url": "https://github.com/demosdemon/dude-wheres-my-car/issues"
   },
@@ -14,8 +20,9 @@
   },
   "description": "Dude, where's my car?",
   "devDependencies": {
+    "node-sass": "^4.9.3",
     "tslint": "^5.11.0",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.3"
   },
   "engines": {
     "node": "~8.11.4"
@@ -28,7 +35,6 @@
     "type": "git",
     "url": "git+https://github.com/demosdemon/dude-wheres-my-car.git"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "version": "1.0.0"
 }

@@ -1,29 +1,32 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-
     "declaration": true,
-    "sourceMap": true,
-    "inlineSources": true,
+    "esModuleInterop": true,
+    "inlineSources": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
+    "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "strict": true,
-
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "outDir": "dist",
-
+    "outDir": "dude/static/js",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"]
-    }
+      "*": [
+        "node_modules/*",
+        "src/types/*"
+      ]
+    },
+    "sourceMap": false,
+    "strict": true,
+    "target": "es6"
   },
-  "include": ["gulpfile.ts", "src/**/*"],
-  "compileOnSave": true
+  "include": [
+    "gulpfile.ts",
+    "src/ts/**/*"
+  ]
 }
