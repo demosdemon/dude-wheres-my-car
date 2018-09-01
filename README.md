@@ -63,4 +63,4 @@ To apply the migration.
 
 For full migration command reference, run `flask db --help`.
 
-[logo]: assets/img/dude-wheres-my-car.png "Dude, Where's My Car?"
+[logo]: src/img/dude-wheres-my-car.png "Dude, Where's My Car?"

@@ -7,7 +7,7 @@ from dude.extensions import admin, alembic, bcrypt, cache, csrf_protect, db, deb
 
 
 def create_app(config_object='dude.settings'):
-    """An application factory, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
+    """Return an application, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
 
     :param config_object: The configuration object to use.
     """
@@ -72,3 +72,11 @@ def register_commands(app):
     app.cli.add_command(commands.lint)
     app.cli.add_command(commands.clean)
     app.cli.add_command(commands.urls)
+
+
+def register_context_processors(app):
+    """Register the Jina2 Context Processors."""
+
+
+def static_path(path):
+    """Return a url to a static file in `/static`."""
