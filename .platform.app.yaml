@@ -13,6 +13,7 @@ type: python:3.6
 hooks:
   build: |
     set -e
+    pip install -U pipenv
     pipenv install --system --deploy
     # npm config set "@fortawesome:registry" https://npm.fontawesome.com/
     # npm config set "//npm.fontawesome.com/:_authToken" $FORT_AWESOME_TOKEN
