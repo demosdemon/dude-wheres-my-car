@@ -1,1 +1,10 @@
-# Intentionally Empty
+# we're defining the files below
+search: False
+
+requirements:
+  - requirements/production.txt:
+      update: all
+      pin: true
+  - requirements/development.txt:
+      pin: false
+      update: all
