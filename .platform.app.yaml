@@ -14,11 +14,11 @@ hooks:
   build: |
     set -e
     pip install -r requirements/production.txt
-    npm config set "@fortawesome:registry" https://npm.fontawesome.com/
-    npm config set "//npm.fontawesome.com/:_authToken" $FORT_AWESOME_TOKEN
-    npm install -g grunt-cli
-    npm install
-    grunt build
+    # npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+    # npm config set "//npm.fontawesome.com/:_authToken" $FORT_AWESOME_TOKEN
+    # npm install -g grunt-cli
+    # npm install
+    # grunt build
   # deploy: |
   #   flask db update
 
