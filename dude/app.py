@@ -4,6 +4,7 @@ from flask import Flask, render_template
 
 from dude import commands, public, user
 from dude.extensions import admin, alembic, bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager
+from dude.middleware import ClacksOverhead
 
 
 def create_app(config_object='dude.settings'):
@@ -14,12 +15,19 @@ def create_app(config_object='dude.settings'):
     app = Flask(__name__.split('.')[0], instance_relative_config=True)
     app.config.from_object(config_object)
     app.config.from_envvar('DUDE_SETTINGS', silent=True)
+    register_middleware(app)
     register_extensions(app)
     register_blueprints(app)
     register_errorhandlers(app)
     register_shellcontext(app)
     register_commands(app)
+    register_context_processors(app)
     return app
+
+
+def register_middleware(app):
+    """Register Werkzeug middleware."""
+    app.wsgi_app = ClacksOverhead(app.wsgi_app)
 
 
 def register_extensions(app):
@@ -33,14 +41,12 @@ def register_extensions(app):
     csrf_protect.init_app(app)
     login_manager.init_app(app)
     debug_toolbar.init_app(app)
-    return None
 
 
 def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
-    return None
 
 
 def register_errorhandlers(app):
@@ -52,7 +58,6 @@ def register_errorhandlers(app):
         return render_template('{0}.html'.format(error_code)), error_code
     for errcode in [401, 404, 500]:
         app.errorhandler(errcode)(render_error)
-    return None
 
 
 def register_shellcontext(app):
