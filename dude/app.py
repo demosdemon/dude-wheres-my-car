@@ -3,8 +3,7 @@
 from flask import Flask, render_template
 
 from dude import commands, public, user
-from dude.extensions import admin, alembic, bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager
-from dude.middleware import ClacksOverhead
+from dude.extensions import admin, alembic, bcrypt, cache, clacks, csrf_protect, db, debug_toolbar, login_manager
 
 
 def create_app(config_object='dude.settings'):
@@ -15,7 +14,6 @@ def create_app(config_object='dude.settings'):
     app = Flask(__name__.split('.')[0], instance_relative_config=True)
     app.config.from_object(config_object)
     app.config.from_envvar('DUDE_SETTINGS', silent=True)
-    register_middleware(app)
     register_extensions(app)
     register_blueprints(app)
     register_errorhandlers(app)
@@ -25,14 +23,11 @@ def create_app(config_object='dude.settings'):
     return app
 
 
-def register_middleware(app):
-    """Register Werkzeug middleware."""
-    app.wsgi_app = ClacksOverhead(app.wsgi_app)
-
-
 def register_extensions(app):
     """Register Flask extensions."""
     import dude.admin  # noqa
+    clacks.init_app(app)
+
     admin.init_app(app)
     alembic.init_app(app)
     bcrypt.init_app(app)
