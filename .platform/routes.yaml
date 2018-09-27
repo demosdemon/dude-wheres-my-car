@@ -4,18 +4,22 @@
 #
 # See https://docs.platform.sh/user_guide/reference/routes-yaml.html
 
-http://{default}/:
+https://{all}/:
   type: redirect
-  to: https://{default}/
-
+  to: https://www.{default}/
+https://www.{all}/:
+  type: redirect
+  to: https://www.{default}/
+https://{default}/:
+  type: redirect
+  to: https://www.{default}/
+http://{all}/:
+  type: redirect
+  to: https://www.{all}/
 http://www.{default}/:
   type: redirect
-  to: https://{default}/
+  to: https://www.{default}/
 
 https://www.{default}/:
-  type: redirect
-  to: https://{default}/
-
-https://{default}/:
   type: upstream
   upstream: dude:http
