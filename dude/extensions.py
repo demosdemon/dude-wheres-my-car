@@ -9,6 +9,8 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 
+from dude.middleware import ClacksOverhead
+
 admin = Admin(template_mode='bootstrap3')
 alembic = Alembic()
 bcrypt = Bcrypt()
@@ -17,3 +19,5 @@ csrf_protect = CSRFProtect()
 db = SQLAlchemy()
 debug_toolbar = DebugToolbarExtension()
 login_manager = LoginManager()
+
+clacks = ClacksOverhead()

@@ -30,6 +30,9 @@ else:
 ENV = env.str('FLASK_ENV', default='production')
 DEBUG = ENV == 'development'
 
+if DEBUG:
+    SEND_FILE_MAX_AGE_DEFAULT = 0
+
 BCRYPT_HANDLE_LONG_PASSWORDS = True
 BCRYPT_LOG_ROUNDS = env.int('BCRYPT_LOG_ROUNDS', default=13)
 CACHE_TYPE = 'redis'  # Can be "memcached", "redis", etc.

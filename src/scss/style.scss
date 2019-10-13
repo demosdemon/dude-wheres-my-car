@@ -1,0 +1,41 @@
+@import "variables";
+@import "bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-pro/scss/fontawesome";
+@import "@fortawesome/fontawesome-pro/scss/v4-shims";
+@import "@fortawesome/fontawesome-pro/scss/brands";
+@import "@fortawesome/fontawesome-pro/scss/solid";
+@import "@fortawesome/fontawesome-pro/scss/regular";
+@import "@fortawesome/fontawesome-pro/scss/light";
+
+// // Load docs components
+// @import "nav";
+// @import "masthead";
+// @import "ads";
+// @import "content";
+// @import "skiplink";
+// @import "sidebar";
+// @import "footer";
+// @import "component-examples";
+// @import "buttons";
+// @import "callouts";
+// @import "examples";
+// @import "browser-bugs";
+// @import "brand";
+// @import "colors";
+// @import "clipboard-js";
+
+// // Load docs dependencies
+// @import "syntax";
+// @import "anchor";
+// @import "algolia";
+
+
+body>.container {
+  padding-top: 60px;
+}
+
+/* footer */
+
+footer ul {
+  list-style: none;
+}
